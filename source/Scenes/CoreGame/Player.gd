@@ -13,4 +13,4 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("ui_right"):
 		velocity.x = 1
 	
-	self.move_and_collide(velocity.normalized() * _SPEED * delta)
+	self.move_and_slide(velocity.normalized() * _SPEED)
