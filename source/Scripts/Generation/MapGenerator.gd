@@ -1,5 +1,6 @@
 extends Node
 
+const Room = preload("res://Scripts/Generation/Room.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 func generate_map() -> TwoDimensionalArray:
@@ -17,9 +18,6 @@ func generate_map() -> TwoDimensionalArray:
 	var start = start_and_end[0]
 	var end = start_and_end[1]
 	# TODO: room with doors on four sides
-	to_return.set_at(start.x, start.y, 'room')
-	to_return.set_at(end.x, end.y, 'room')
-	print("start at " + str(start))
 	
 	# random walk
 	var current = start
@@ -27,18 +25,21 @@ func generate_map() -> TwoDimensionalArray:
 		var walkables = _get_walkables(current, to_return)
 		if len(walkables) == 0:
 			current = start # stuck, start over
-			print('stuck')
 		else:
 			var next = walkables[randi() % len(walkables)]
+			var exit = _exit_from(current, next)
+			var opposite = _exit_from(next, current)
+			to_return.get_at(current.x, current.y).add_exit(exit)
+			to_return.get_at(next.x, next.y).add_exit(opposite)
+			print(str(current) + " exits to " + str(next))
 			current = next
-			to_return.set_at(current.x, current.y, 'room')
-			print("move to " + str(current))
+			
 	return to_return
 
-func _fill_map(map:TwoDimensionalArray) -> void:
+func _fill_map(area_map:TwoDimensionalArray) -> void:
 	for y in range(Constants.VERTICAL_SECTIONS):
 		for x in range(Constants.HORIZONTAL_SECTIONS):
-			map.set_at(x, y, 'solid')
+			area_map.set_at(x, y, Room.new())#x, y))
 			
 func _get_walkables(current:Vector2, map:TwoDimensionalArray) -> Array:
 	var to_return = []
@@ -51,3 +52,16 @@ func _get_walkables(current:Vector2, map:TwoDimensionalArray) -> Array:
 	if current.y < Constants.VERTICAL_SECTIONS - 1:
 		to_return.append(Vector2(current.x, current.y + 1))
 	return to_return
+
+func _exit_from(start:Vector2, end:Vector2) -> String:
+	if start.x < end.x:
+		return "E"
+	elif start.x > end.x:
+		return "W"
+	if start.y < end.y:
+		return "S"
+	elif start.y > end.y:
+		return "N"
+		
+	push_error("Not sure how to exit from " + str(start) + " to " + str(end))
+	return "?"

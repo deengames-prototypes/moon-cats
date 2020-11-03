@@ -4,7 +4,7 @@ const MapGenerator = preload("res://Scripts/Generation/MapGenerator.gd")
 const Wall = preload("res://Scenes/CoreGame/Wall.tscn")
 
 func _ready():
-	_print_map(MapGenerator.new().generate_map())
+	MapGenerator.new().generate_map()
 	# These go last, on top of everything, so you can't walk off-map
 	_create_border_walls()
 
@@ -28,14 +28,3 @@ func _create_border_walls():
 	add_child(w4)
 	w4.resize(Constants.WALL_SIZE, Constants.MAP_HEIGHT - (2 * Constants.WALL_SIZE))
 	w4.position = Vector2(1280 - Constants.WALL_SIZE, Constants.WALL_SIZE)
-
-func _print_map(map):
-	var to_print = ""
-	for y in range(Constants.VERTICAL_SECTIONS):
-		for x in range(Constants.HORIZONTAL_SECTIONS):
-			if map.get_at(x, y) == "room":
-				to_print += "0"
-			else:
-				to_print += "1"
-		to_print += "\n"
-	print(to_print)
