@@ -3,8 +3,8 @@ extends StaticBody2D
 onready var _collision_shape = $CollisionShape2D
 onready var _rect = $NinePatchRect
 
-var _width:int = 32
-var _height:int = 32
+var _width:int = Constants.WALL_SIZE
+var _height:int = Constants.WALL_SIZE
 
 func _ready():
 	_collision_shape.shape = _collision_shape.shape.duplicate() # make unique

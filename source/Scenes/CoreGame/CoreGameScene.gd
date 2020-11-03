@@ -6,21 +6,22 @@ func _ready():
 	_create_border_walls()
 
 func _create_border_walls():
+	# Inner wall, takes up 32px inside on each side of the map
 	var w1 = Wall.instance()
 	add_child(w1)
-	w1.resize(1280, 32)
+	w1.resize(Constants.MAP_WIDTH, Constants.WALL_SIZE)
 	
 	var w2 = Wall.instance()
 	add_child(w2)
-	w2.resize(1280, 32)
-	w2.position = Vector2(0, 720 - 32)
+	w2.resize(Constants.MAP_WIDTH, Constants.WALL_SIZE)
+	w2.position = Vector2(0, Constants.MAP_HEIGHT - Constants.WALL_SIZE)
 	
 	var w3 = Wall.instance()
 	add_child(w3)
-	w3.resize(32, 720 - 64)
-	w3.position = Vector2(0, 32)
+	w3.resize(Constants.WALL_SIZE, Constants.MAP_HEIGHT - (2 * Constants.WALL_SIZE))
+	w3.position = Vector2(0, Constants.WALL_SIZE)
 	
 	var w4 = Wall.instance()
 	add_child(w4)
-	w4.resize(32, 720 - 64)
-	w4.position = Vector2(1280 - 32, 32)
+	w4.resize(Constants.WALL_SIZE, Constants.MAP_HEIGHT - (2 * Constants.WALL_SIZE))
+	w4.position = Vector2(1280 - Constants.WALL_SIZE, Constants.WALL_SIZE)
