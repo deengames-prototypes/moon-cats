@@ -3,6 +3,7 @@ extends Node2D
 const Wall = preload("res://Scenes/CoreGame/Wall.tscn")
 
 func _ready():
+	# These go last, on top of everything, so you can't walk off-map
 	_create_border_walls()
 
 func _create_border_walls():
