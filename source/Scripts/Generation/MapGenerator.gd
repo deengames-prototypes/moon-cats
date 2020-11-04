@@ -31,7 +31,6 @@ func generate_map() -> TwoDimensionalArray:
 			var opposite = _exit_from(next, current)
 			to_return.get_at(current.x, current.y).add_exit(exit)
 			to_return.get_at(next.x, next.y).add_exit(opposite)
-			print(str(current) + " exits to " + str(next))
 			current = next
 			
 	return to_return
