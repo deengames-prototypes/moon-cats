@@ -2,18 +2,31 @@ extends Node2D
 
 const MapGenerator = preload("res://Scripts/Generation/MapGenerator.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
-const Wall = preload("res://Scenes/CoreGame/Wall.tscn")
 
 const BlockedSection = preload("res://Scenes/CoreGame/BlockedSection.tscn")
 const OpenSection = preload("res://Scenes/CoreGame/OpenSection.tscn")
 
 onready var _geometry:Node2D = $Geometry
+onready var _player:Node2D = $Player
 
 func _ready():
-	var map = MapGenerator.new().generate_map()
+	# TODO: this makes difficulty spikes (super long path vs. short path).
+	# This is partly mitigated by non-longest paths to victory, but that's not deterministic.
+
+	# We need to have more fine-grained control over the number of open rooms...
+	# OR: make some rooms easy, bonus/beneficial, etc. instead.
+	# OR: use a different room as the end-room to control the length.
+	var map_data = MapGenerator.new().generate_map()
+	assert(len(map_data) == 3)
+	
+	var map:TwoDimensionalArray = map_data[0]
+	var start:Vector2 = map_data[1]
+	var end:Vector2 = map_data[2]
+	
+	var start_pixels = start * Vector2(Constants.SECTION_WIDTH, Constants.SECTION_HEIGHT)
+	_player.position = start_pixels + Vector2(Constants.SECTION_WIDTH / 2, Constants.SECTION_HEIGHT / 2)
+	
 	_generate_rooms(map)
-	# These go last, on top of everything, so you can't walk off-map
-	_create_border_walls()
 
 func _generate_rooms(map:TwoDimensionalArray):
 	for y in range(Constants.VERTICAL_SECTIONS):
@@ -30,23 +43,3 @@ func _generate_rooms(map:TwoDimensionalArray):
 			instance.position = posiiton
 			_geometry.add_child(instance)
 			
-func _create_border_walls():
-	# Inner wall, takes up 32px inside on each side of the map
-	var w1 = Wall.instance()
-	_geometry.add_child(w1)
-	w1.resize(Constants.MAP_WIDTH, Constants.WALL_SIZE)
-	
-	var w2 = Wall.instance()
-	_geometry.add_child(w2)
-	w2.resize(Constants.MAP_WIDTH, Constants.WALL_SIZE)
-	w2.position = Vector2(0, Constants.MAP_HEIGHT - Constants.WALL_SIZE)
-	
-	var w3 = Wall.instance()
-	_geometry.add_child(w3)
-	w3.resize(Constants.WALL_SIZE, Constants.MAP_HEIGHT - (2 * Constants.WALL_SIZE))
-	w3.position = Vector2(0, Constants.WALL_SIZE)
-	
-	var w4 = Wall.instance()
-	_geometry.add_child(w4)
-	w4.resize(Constants.WALL_SIZE, Constants.MAP_HEIGHT - (2 * Constants.WALL_SIZE))
-	w4.position = Vector2(Constants.MAP_WIDTH - Constants.WALL_SIZE, Constants.WALL_SIZE)

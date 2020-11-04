@@ -3,7 +3,7 @@ extends Node
 const Room = preload("res://Scripts/Generation/Room.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
-func generate_map() -> TwoDimensionalArray:
+func generate_map() -> Array: # [map:TwoDimensionalArray, start:Vector2, end:Vector2]
 	var to_return = TwoDimensionalArray.new(Constants.HORIZONTAL_SECTIONS, Constants.VERTICAL_SECTIONS)
 	
 	_fill_map(to_return)
@@ -36,7 +36,7 @@ func generate_map() -> TwoDimensionalArray:
 		to_return.get_at(next.x, next.y).add_exit(opposite)
 		current = next
 			
-	return to_return
+	return [to_return, start, end]
 
 func _fill_map(area_map:TwoDimensionalArray) -> void:
 	for y in range(Constants.VERTICAL_SECTIONS):
