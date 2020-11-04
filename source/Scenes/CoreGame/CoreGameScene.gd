@@ -24,6 +24,7 @@ func _generate_rooms(map:TwoDimensionalArray):
 			var instance:Node2D
 			if room.has_exits():
 				instance = OpenSection.instance()
+				room.open_exits(instance)
 			else:
 				instance = BlockedSection.instance()
 			instance.position = posiiton
