@@ -34,22 +34,22 @@ position = Vector2( 512, 342 )
 rotation = 1.5708
 
 [node name="StaticBody2D5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 480 )
+position = Vector2( 0, 504 )
 
 [node name="S" parent="." instance=ExtResource( 2 )]
-position = Vector2( 171, 480 )
+position = Vector2( 171, 504 )
 
 [node name="StaticBody2D6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 342, 480 )
+position = Vector2( 342, 504 )
 
 [node name="StaticBody2D7" parent="." instance=ExtResource( 2 )]
-position = Vector2( 32, 0 )
+position = Vector2( 8, 0 )
 rotation = 1.5708
 
 [node name="W" parent="." instance=ExtResource( 2 )]
-position = Vector2( 32, 171 )
+position = Vector2( 8, 171 )
 rotation = 1.5708
 
 [node name="StaticBody2D8" parent="." instance=ExtResource( 2 )]
-position = Vector2( 32, 342 )
+position = Vector2( 8, 342 )
 rotation = 1.5708
