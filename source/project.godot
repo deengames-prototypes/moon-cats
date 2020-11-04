@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Constants="*res://Scripts/Constants.gd"
+Globals="*res://Scripts/Globals.gd"
 
 [display]
 

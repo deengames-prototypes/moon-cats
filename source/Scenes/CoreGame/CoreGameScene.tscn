@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/CoreGame/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/CoreGame/Entities/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/CoreGame/CoreGameScene.gd" type="Script" id=2]
 
 [node name="Node2D" type="Node2D"]
