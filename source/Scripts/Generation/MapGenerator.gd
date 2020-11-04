@@ -22,16 +22,19 @@ func generate_map() -> TwoDimensionalArray:
 	# random walk
 	var current = start
 	while current != end:
-		var walkables = _get_walkables(current, to_return)
+		var walkables = _get_closed_walkables(current, to_return)
+		if len(walkables) == 0:
+			walkables = _get_all_walkables(current, to_return)
 		if len(walkables) == 0:
 			current = start # stuck, start over
-		else:
-			var next = walkables[randi() % len(walkables)]
-			var exit = _exit_from(current, next)
-			var opposite = _exit_from(next, current)
-			to_return.get_at(current.x, current.y).add_exit(exit)
-			to_return.get_at(next.x, next.y).add_exit(opposite)
-			current = next
+			continue
+			
+		var next = walkables[randi() % len(walkables)]
+		var exit = _exit_from(current, next)
+		var opposite = _exit_from(next, current)
+		to_return.get_at(current.x, current.y).add_exit(exit)
+		to_return.get_at(next.x, next.y).add_exit(opposite)
+		current = next
 			
 	return to_return
 
@@ -40,7 +43,7 @@ func _fill_map(area_map:TwoDimensionalArray) -> void:
 		for x in range(Constants.HORIZONTAL_SECTIONS):
 			area_map.set_at(x, y, Room.new())#x, y))
 			
-func _get_walkables(current:Vector2, map:TwoDimensionalArray) -> Array:
+func _get_all_walkables(current:Vector2, map:TwoDimensionalArray) -> Array:
 	var to_return = []
 	if current.x > 0:
 		to_return.append(Vector2(current.x - 1, current.y))
@@ -49,6 +52,18 @@ func _get_walkables(current:Vector2, map:TwoDimensionalArray) -> Array:
 	if current.y > 0:
 		to_return.append(Vector2(current.x, current.y - 1))
 	if current.y < Constants.VERTICAL_SECTIONS - 1:
+		to_return.append(Vector2(current.x, current.y + 1))
+	return to_return
+
+func _get_closed_walkables(current:Vector2, map:TwoDimensionalArray) -> Array:
+	var to_return = []
+	if current.x > 0 and not map.get_at(current.x - 1, current.y).has_exits():
+		to_return.append(Vector2(current.x - 1, current.y))
+	if current.x < Constants.HORIZONTAL_SECTIONS - 1  and not map.get_at(current.x + 1, current.y).has_exits():
+		to_return.append(Vector2(current.x + 1, current.y))
+	if current.y > 0  and not map.get_at(current.x, current.y - 1).has_exits():
+		to_return.append(Vector2(current.x, current.y - 1))
+	if current.y < Constants.VERTICAL_SECTIONS - 1  and not map.get_at(current.x, current.y + 1).has_exits():
 		to_return.append(Vector2(current.x, current.y + 1))
 	return to_return
 
