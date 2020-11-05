@@ -3,8 +3,9 @@ extends Node2D
 const MapGenerator = preload("res://Scripts/Generation/MapGenerator.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
-const BlockedSection = preload("res://Scenes/CoreGame/BlockedSection.tscn")
-const OpenSection = preload("res://Scenes/CoreGame/OpenSection.tscn")
+const BlockedSection = preload("res://Scenes/CoreGame/Sections/BlockedSection.tscn")
+const LaserSection = preload("res://Scenes/CoreGame/Sections/LaserSection.tscn")
+const OpenSection = preload("res://Scenes/CoreGame/Sections/OpenSection.tscn")
 
 onready var _geometry:Node2D = $Geometry
 onready var _player:Node2D = $Player
@@ -26,9 +27,9 @@ func _ready():
 	var start_pixels = start * Vector2(Constants.SECTION_WIDTH, Constants.SECTION_HEIGHT)
 	_player.position = start_pixels + Vector2(Constants.SECTION_WIDTH / 2, Constants.SECTION_HEIGHT / 2)
 	
-	_generate_rooms(map)
+	_generate_rooms(map, start)
 
-func _generate_rooms(map:TwoDimensionalArray):
+func _generate_rooms(map:TwoDimensionalArray, start:Vector2):
 	for y in range(Constants.VERTICAL_SECTIONS):
 		for x in range(Constants.HORIZONTAL_SECTIONS):
 			var posiiton = Vector2(x, y) * Vector2(Constants.SECTION_WIDTH, Constants.SECTION_HEIGHT)
@@ -36,7 +37,11 @@ func _generate_rooms(map:TwoDimensionalArray):
 			
 			var instance:Node2D
 			if room.has_exits():
-				instance = OpenSection.instance()
+				# TEMP DEBUG TODO HERP DERP LOLWUT
+				if Vector2(x, y) == start:
+					instance = LaserSection.instance()
+				else:
+					instance = OpenSection.instance()
 				room.open_exits(instance)
 			else:
 				instance = BlockedSection.instance()
