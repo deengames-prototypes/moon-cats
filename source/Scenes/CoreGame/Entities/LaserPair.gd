@@ -3,7 +3,7 @@ extends Node2D
 onready var _beam:Area2D = $Beam
 onready var _label:Label = $Label
 
-const _SLOW_MOTION_MULTIPLIER:int = 5
+const _SLOW_MOTION_MULTIPLIER:int = 10
 const _CYCLE_TIME_SECONDS:int = 1
 
 var _accumulator:float = 0
