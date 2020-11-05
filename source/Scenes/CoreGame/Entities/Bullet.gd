@@ -2,6 +2,7 @@ extends Node2D
 
 const _SPEED:int = 500
 const _SLOW_MOTION_MULTIPLIER:int = 50
+
 export var velocity:Vector2
 
 func _process(delta):
@@ -11,3 +12,6 @@ func _process(delta):
 		move_by /= _SLOW_MOTION_MULTIPLIER
 		
 	self.position += velocity * move_by
+
+func _on_Bullet_body_entered(body):
+	self.queue_free()
