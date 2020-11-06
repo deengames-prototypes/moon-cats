@@ -7,6 +7,8 @@ const BlockedSection = preload("res://Scenes/CoreGame/Sections/BlockedSection.ts
 const LaserSection = preload("res://Scenes/CoreGame/Sections/LaserSection.tscn")
 const OpenSection = preload("res://Scenes/CoreGame/Sections/OpenSection.tscn")
 
+const Chaser = preload("res://Scenes/CoreGame/Entities/Enemies/Chaser.tscn")
+
 onready var _geometry:Node2D = $Geometry
 onready var _player:Node2D = $Player
 
@@ -42,6 +44,13 @@ func _generate_rooms(map:TwoDimensionalArray, start:Vector2):
 					instance = LaserSection.instance()
 				else:
 					instance = OpenSection.instance()
+				
+				if Globals.num_monsters == 0:
+					Globals.num_monsters += 1
+					var c = Chaser.instance()
+					c.position = position + Vector2(Constants.SECTION_WIDTH / 3, Constants.SECTION_HEIGHT / 3)
+					add_child(c)
+				
 				room.open_exits(instance)
 			else:
 				instance = BlockedSection.instance()

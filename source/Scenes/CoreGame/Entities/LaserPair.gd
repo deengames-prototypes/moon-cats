@@ -2,6 +2,7 @@ extends Node2D
 
 onready var _beam:Area2D = $Beam
 onready var _label:Label = $Label
+onready var _label2:Label = $Label2
 
 const _SLOW_MOTION_MULTIPLIER:int = 10
 const _CYCLE_TIME_SECONDS:int = 1
@@ -34,6 +35,7 @@ func _process(delta):
 		_toggle_beam()
 		
 	_label.text = str(int(stepify(_CYCLE_TIME_SECONDS - _accumulator, 0.1) * 10))
+	_label2.text = _label.text
 
 func _should_destroy(body) -> bool:
 	return body is KinematicBody2D

@@ -3,10 +3,10 @@
 [ext_resource path="res://Scenes/CoreGame/Entities/LaserPair.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 256, 8 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 20, 20 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -38,7 +38,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Beam"]
 position = Vector2( 256, 20 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Receptacle1" type="StaticBody2D" parent="."]
 
@@ -52,7 +52,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Receptacle1"]
 position = Vector2( 20, 20 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Receptacle2" type="StaticBody2D" parent="."]
 position = Vector2( 472, 0 )
@@ -67,9 +67,20 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Receptacle2"]
 position = Vector2( 20, 20 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Label" type="Label" parent="."]
+custom_fonts/font = SubResource( 3 )
+text = "10"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 472.0
+margin_right = 512.0
+margin_bottom = 41.0
 custom_fonts/font = SubResource( 3 )
 text = "10"
 valign = 1

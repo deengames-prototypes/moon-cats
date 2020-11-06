@@ -10,7 +10,3 @@ position = Vector2( 0, 128 )
 
 [node name="Laser2" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 0, 344 )
-
-[node name="Laser3" parent="." index="15" instance=ExtResource( 2 )]
-position = Vector2( 128, 0 )
-rotation = 1.5708
