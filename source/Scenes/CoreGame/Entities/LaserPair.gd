@@ -11,8 +11,11 @@ const _INACTIVE_TIME_SECONDS:int = 2
 var _accumulator:float = 0
 
 func _ready():
-	# turn off
+	# Turn off
 	_toggle_beam()
+	
+	# Display upright if rotated
+	_label.set_rotation(-self.rotation)
 
 func _toggle_beam():
 	_beam.visible = not _beam.visible
