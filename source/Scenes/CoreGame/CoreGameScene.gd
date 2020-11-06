@@ -43,7 +43,7 @@ func _generate_rooms(map:TwoDimensionalArray):
 				if randf() < 0.5:
 					section = LaserSection.instance()
 					if randf() < 0.5:
-						section.rotation_degrees = 90
+						section.configure_vertically()
 				else:
 					section = OpenSection.instance()
 				
