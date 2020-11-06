@@ -29,31 +29,43 @@ func _ready():
 	var start_pixels = start * Vector2(Constants.SECTION_WIDTH, Constants.SECTION_HEIGHT)
 	_player.position = start_pixels + Vector2(Constants.SECTION_WIDTH / 2, Constants.SECTION_HEIGHT / 2)
 	
-	_generate_rooms(map, start)
+	_generate_rooms(map)
 
-func _generate_rooms(map:TwoDimensionalArray, start:Vector2):
+func _generate_rooms(map:TwoDimensionalArray):
 	for y in range(Constants.VERTICAL_SECTIONS):
 		for x in range(Constants.HORIZONTAL_SECTIONS):
-			var posiiton = Vector2(x, y) * Vector2(Constants.SECTION_WIDTH, Constants.SECTION_HEIGHT)
+			var section_position = Vector2(x, y) * Vector2(Constants.SECTION_WIDTH, Constants.SECTION_HEIGHT)
 			var room = map.get_at(x, y)
 			
-			var instance:Node2D
+			var section:Node2D
 			if room.has_exits():
 				# TEMP DEBUG TODO HERP DERP LOLWUT
-				if Vector2(x, y) == start:
-					instance = LaserSection.instance()
+				if randf() < 0.5:
+					section = LaserSection.instance()
+					if randf() < 0.5:
+						section.rotation_degrees = 90
 				else:
-					instance = OpenSection.instance()
+					section = OpenSection.instance()
 				
-				if Globals.num_monsters == 0:
-					Globals.num_monsters += 1
-					var c = Chaser.instance()
-					c.position = position + Vector2(Constants.SECTION_WIDTH / 3, Constants.SECTION_HEIGHT / 3)
-					add_child(c)
-				
-				room.open_exits(instance)
+				if room.has_exits():
+					room.open_exits(section)
+					var enemy = Chaser.instance()
+					self._position_in_section(enemy, section_position)
+					add_child(enemy)
 			else:
-				instance = BlockedSection.instance()
-			instance.position = posiiton
-			_geometry.add_child(instance)
+				section = BlockedSection.instance()
+				
+			section.position = section_position
+			_geometry.add_child(section)
 			
+func _position_in_section(enemy:KinematicBody2D, section_position:Vector2) -> void:
+	var enemy_size = 32 # TODO: get from sprite
+	var edge_buffer = 8 # Don't spawn right on the edges
+	var available_width = Constants.SECTION_WIDTH - enemy_size - edge_buffer
+	var available_height = Constants.SECTION_HEIGHT - enemy_size - edge_buffer
+	
+	var rand_x = randi() % available_width
+	var rand_y = randi() % available_height
+	
+	# Position inside only
+	enemy.position = section_position + Vector2(edge_buffer + rand_x, edge_buffer + rand_y)

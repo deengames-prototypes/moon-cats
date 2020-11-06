@@ -4,7 +4,6 @@ const _SPEED = 80
 var _target:Node2D
 
 func _ready():
-	print(str(self) + " is at " + str(self.position))
 	var players = get_tree().get_nodes_in_group("Player")
 	assert(len(players) <= 1)
 	if len(players) == 1:
@@ -16,4 +15,3 @@ func _physics_process(_delta):
 		var direction = (_target.position - self.position).normalized()
 		var move = direction * _SPEED
 		self.move_and_slide(move)
-		print(str(self) + " moved to " + str(self.position))
