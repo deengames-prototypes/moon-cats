@@ -5,8 +5,10 @@
 
 [node name="Node2D" instance=ExtResource( 1 )]
 
-[node name="Laser1" parent="." index="13" instance=ExtResource( 2 )]
-position = Vector2( 0, 128 )
+[node name="Laser1" parent="." index="3" instance=ExtResource( 2 )]
+position = Vector2( 170, 0 )
+rotation = 1.5708
 
-[node name="Laser2" parent="." index="14" instance=ExtResource( 2 )]
-position = Vector2( 0, 344 )
+[node name="Laser2" parent="." index="4" instance=ExtResource( 2 )]
+position = Vector2( 384, 0 )
+rotation = 1.5708
