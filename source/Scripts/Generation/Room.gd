@@ -17,7 +17,7 @@ func open_exits(open_section):
 		push_error("Can't open exits if there are none!")
 	else:
 		for exit in _exits:
-			open_section.get_node(exit).queue_free()
+			open_section.get_node("Walls/" + exit).queue_free()
 
 func add_exit(exit:String) -> void:
 	if exit != "N" and exit != "S" and exit != "W" and exit != "E":

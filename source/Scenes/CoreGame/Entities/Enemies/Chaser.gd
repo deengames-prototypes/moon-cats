@@ -12,6 +12,6 @@ func _ready():
 
 func _physics_process(_delta):
 	if _target != null and Globals.is_player_moving:
-		var direction = (_target.position - self.position).normalized()
+		var direction = (_target.global_position - self.global_position).normalized()
 		var move = direction * _SPEED
 		self.move_and_slide(move)
