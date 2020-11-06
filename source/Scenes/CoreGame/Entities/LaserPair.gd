@@ -5,14 +5,14 @@ onready var _label:Label = $Label
 onready var _label2:Label = $Label2
 
 const _SLOW_MOTION_MULTIPLIER:int = 10
-const _CYCLE_TIME_SECONDS:int = 1
+const _ACTIVE_TIME_SECONDS:int = 1
+const _INACTIVE_TIME_SECONDS:int = 2
 
 var _accumulator:float = 0
 
 func _ready():
 	# turn off
 	_toggle_beam()
-	_label.set_rotation(-self.rotation)
 
 func _toggle_beam():
 	_beam.visible = not _beam.visible
@@ -30,11 +30,18 @@ func _process(delta):
 		elapsed_time /= _SLOW_MOTION_MULTIPLIER
 
 	_accumulator += elapsed_time
-	if _accumulator >= _CYCLE_TIME_SECONDS:
-		_accumulator -= _CYCLE_TIME_SECONDS
+	
+	var which_time:float
+	if _beam.visible:
+		which_time = _ACTIVE_TIME_SECONDS
+	else:
+		which_time = _INACTIVE_TIME_SECONDS
+		
+	if _accumulator >= which_time:
+		_accumulator -= which_time
 		_toggle_beam()
 		
-	_label.text = str(int(stepify(_CYCLE_TIME_SECONDS - _accumulator, 0.1) * 10))
+	_label.text = str(int(stepify(which_time - _accumulator, 0.1) * 10))
 	_label2.text = _label.text
 
 func _should_destroy(body) -> bool:

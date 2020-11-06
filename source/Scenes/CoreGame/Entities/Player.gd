@@ -19,8 +19,6 @@ func _ready():
 	$Camera2D.limit_right = Constants.MAP_WIDTH
 	$Camera2D.limit_bottom = Constants.MAP_HEIGHT
 	
-	$Camera2D.zoom = Vector2(3, 3)
-	
 	add_to_group("Player")
 
 func _physics_process(delta):

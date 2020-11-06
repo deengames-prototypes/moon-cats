@@ -4,7 +4,8 @@ const MapGenerator = preload("res://Scripts/Generation/MapGenerator.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 const BlockedSection = preload("res://Scenes/CoreGame/Sections/BlockedSection.tscn")
-const LaserSection = preload("res://Scenes/CoreGame/Sections/LaserSection.tscn")
+const HorizontalLaserSection = preload("res://Scenes/CoreGame/Sections/HorizontalLaserSection.tscn")
+const VerticalLaserSection = preload("res://Scenes/CoreGame/Sections/VerticalLaserSection.tscn")
 const OpenSection = preload("res://Scenes/CoreGame/Sections/OpenSection.tscn")
 
 const Chaser = preload("res://Scenes/CoreGame/Entities/Enemies/Chaser.tscn")
@@ -41,9 +42,10 @@ func _generate_rooms(map:TwoDimensionalArray):
 			if room.has_exits():
 				# TEMP DEBUG TODO HERP DERP LOLWUT
 				if randf() < 0.5:
-					section = LaserSection.instance()
 					if randf() < 0.5:
-						section.configure_vertically()
+						section = HorizontalLaserSection.instance()
+					else:
+						section = VerticalLaserSection.instance()
 				else:
 					section = OpenSection.instance()
 				
