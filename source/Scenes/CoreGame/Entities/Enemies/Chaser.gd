@@ -9,6 +9,9 @@ func _ready():
 	if len(players) == 1:
 		var player = players[0]
 		_target = player
+		
+func on_shot():
+	self.queue_free()
 
 func _physics_process(_delta):
 	if _target != null and Globals.is_player_moving:

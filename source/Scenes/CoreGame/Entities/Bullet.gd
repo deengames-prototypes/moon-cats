@@ -14,4 +14,6 @@ func _process(delta):
 	self.position += velocity * move_by
 
 func _on_Bullet_body_entered(body):
+	if body.has_method("on_shot"):
+		body.on_shot()
 	self.queue_free()
