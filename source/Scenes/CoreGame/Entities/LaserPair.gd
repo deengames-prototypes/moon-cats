@@ -20,8 +20,11 @@ func _ready():
 	
 	# Display upright if rotated
 	_label.set_rotation(-self.rotation)
+	_label2.set_rotation(-self.rotation)
 	# repositioning magic, derived by experimenation
-	if self.rotation != 0: _label.margin_top += $Receptacle1/ColorRect.margin_right
+	if self.rotation != 0:
+		_label.margin_top += $Receptacle1/ColorRect.margin_right
+		_label2.margin_top += $Receptacle1/ColorRect.margin_right
 	
 	add_child(_timer)
 	_timer.connect("on_tick", self, "_on_timer_tick")

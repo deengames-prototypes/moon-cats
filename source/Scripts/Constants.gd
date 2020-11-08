@@ -1,7 +1,7 @@
 extends Node
 
-const SECTION_WIDTH:int = 768
-const SECTION_HEIGHT:int = 768
+const SECTION_WIDTH:int = 576
+const SECTION_HEIGHT:int = 576
 
 const HORIZONTAL_SECTIONS:int = 5
 const VERTICAL_SECTIONS:int = 5
