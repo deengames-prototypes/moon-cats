@@ -11,13 +11,14 @@ width = 32
 height = 32
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 32.0
-margin_bottom = 32.0
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
 color = Color( 0.460693, 0.4032, 0.56, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 16, 16 )
 shape = SubResource( 1 )
