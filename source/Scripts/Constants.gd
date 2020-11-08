@@ -1,9 +1,7 @@
 extends Node
 
-const WALL_SIZE:int = 32
-
-const SECTION_WIDTH:int = 512
-const SECTION_HEIGHT:int = 512
+const SECTION_WIDTH:int = 768
+const SECTION_HEIGHT:int = 768
 
 const HORIZONTAL_SECTIONS:int = 5
 const VERTICAL_SECTIONS:int = 5

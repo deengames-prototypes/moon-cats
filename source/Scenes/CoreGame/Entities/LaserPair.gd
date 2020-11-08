@@ -3,8 +3,8 @@ extends Node2D
 const MoveTimeTimer = preload("res://Scripts/Time/MoveTimeTimer.gd")
 
 onready var _beam:Area2D = $Beam
-onready var _label:Label = $Label
-onready var _label2:Label = $Label2
+onready var _label:Label = $Receptacle1/Label
+onready var _label2:Label = $Receptacle2/Label2
 
 const _TIME_FROZEN_MULTIPLIER:float = 0.1
 const _ACTIVE_TIME_SECONDS:int = 1
