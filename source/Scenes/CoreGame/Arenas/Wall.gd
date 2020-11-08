@@ -3,8 +3,11 @@ extends StaticBody2D
 
 export var width:int = 0 setget set_width, get_width
 export var height:int = 0 setget set_height, get_height
+export var health:int = 0 setget set_health, get_health
+
 var _width:int
 var _height:int 
+var _health:int
 
 func _ready():
 	$CollisionShape2D.shape = RectangleShape2D.new() # not shared by instances
@@ -23,6 +26,18 @@ func get_width() -> int:
 
 func get_height() -> int:
 	return _height
+
+func set_health(h:int) -> void:
+	_health = h
+
+func get_health() -> int:
+	return _health
+	
+func on_shot():
+	if _health != 0: # destrucible
+		set_health(_health - 1)
+		if _health <= 0:
+			queue_free()
 	
 func _resize_me() -> void:
 	if $ColorRect != null:
