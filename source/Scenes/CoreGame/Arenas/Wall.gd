@@ -9,9 +9,11 @@ export var rotation_speed:int = 0
 var _width:int
 var _height:int 
 var _health:int
+var _is_ready = false
 
 func _ready():
 	$CollisionShape2D.shape = RectangleShape2D.new() # not shared by instances
+	_is_ready = true
 	_resize_me()
 
 func set_width(w:int) -> void:
@@ -48,10 +50,11 @@ func _process(delta):
 		self.rotation_degrees += amount
 
 func _resize_me() -> void:
-	if $ColorRect != null:
-		$ColorRect.margin_left  = -_width / 2
-		$ColorRect.margin_right = _width / 2
-		$ColorRect.margin_top = -_height / 2
-		$ColorRect.margin_bottom = _height / 2
-	if $CollisionShape2D != null:
-		$CollisionShape2D.shape.extents = Vector2(_width / 2, _height / 2)
+	if _is_ready:
+		if $ColorRect != null:
+			$ColorRect.margin_left  = -_width / 2
+			$ColorRect.margin_right = _width / 2
+			$ColorRect.margin_top = -_height / 2
+			$ColorRect.margin_bottom = _height / 2
+		if $CollisionShape2D != null:
+			$CollisionShape2D.shape.extents = Vector2(_width / 2, _height / 2)
