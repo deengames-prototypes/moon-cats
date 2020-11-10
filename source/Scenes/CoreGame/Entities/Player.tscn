@@ -23,7 +23,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ReloadBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
 margin_left = -24.0
 margin_top = -40.0
 margin_right = 24.0

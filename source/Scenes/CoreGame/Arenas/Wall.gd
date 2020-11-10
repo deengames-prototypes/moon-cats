@@ -43,10 +43,8 @@ func on_shot():
 			queue_free()
 
 func _process(delta):
-	if not Engine.editor_hint and rotation_speed > 0:
-		var amount = delta * rotation_speed
-		if Globals.is_player_moving:
-			amount *= 10
+	if not Engine.editor_hint and rotation_speed > 0 and Globals.is_player_moving:
+		var amount = delta * rotation_speed * 10
 		self.rotation_degrees += amount
 
 func _resize_me() -> void:

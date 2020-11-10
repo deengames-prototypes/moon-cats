@@ -6,21 +6,22 @@ const MoveTimeTimer = preload("res://Scripts/Time/MoveTimeTimer.gd")
 const _SPAWN_EVERY_SECONDS:float = 1.0
 
 var _timer = MoveTimeTimer.new(_SPAWN_EVERY_SECONDS, 0)
-var _spawn_left = 10
+var to_spawn = 10
 
 func _ready():
 	_timer.connect("on_tick", self, "_on_timer_tick")
 	add_child(_timer)
-	$Label.text = str(_spawn_left)
+	$Label.text = str(to_spawn)
+	_timer.start()
 	
 func _on_timer_tick():
-	if _spawn_left > 0:
-		_spawn_left -= 1
+	if to_spawn > 0:
+		to_spawn -= 1
 		var chaser = Chaser.instance()
 		self.get_parent().add_child(chaser)
 		chaser.position = self.position
-		$Label.text = str(_spawn_left)
+		$Label.text = str(to_spawn)
 	else:
-		_timer.queue_free()
-		$Label.queue_free()
+		_timer.stop()
+		$Label.text = ""
 		$Particles2D.emitting = false
