@@ -1,6 +1,7 @@
 extends Node2D
 
 const Chaser = preload("res://Scenes/CoreGame/Entities/Enemies/Chaser.tscn")
+const Gunner = preload("res://Scenes/CoreGame/Entities/Enemies/Gunner.tscn")
 const MoveTimeTimer = preload("res://Scripts/Time/MoveTimeTimer.gd")
 
 export var to_spawn = 10
@@ -20,10 +21,17 @@ func start():
 func _on_timer_tick():
 	if to_spawn > 0:
 		to_spawn -= 1
-		var chaser = Chaser.instance()
+		# TODO: intelligent selection baed on wave number
+		
+		var enemy:KinematicBody2D
+		if randf() <= 0.7:
+			enemy  = Chaser.instance()
+		else:
+			enemy = Gunner.instance()
+			
 		# TODO: broadcast event, parent re-broadcasts event
-		self.get_parent().get_parent().add_enemy(chaser)
-		chaser.position = self.position
+		self.get_parent().get_parent().add_enemy(enemy)
+		enemy.position = self.position
 		$Label.text = str(to_spawn)
 	else:
 		_timer.stop()

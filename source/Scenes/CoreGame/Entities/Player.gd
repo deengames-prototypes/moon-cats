@@ -55,8 +55,12 @@ func _physics_process(delta):
 	else:
 		$ColorRect.color = Color(0.5, 0.5, 0.5)
 
+func on_shot():
+	pass#self.queue_free()
+
 func _fire(velocity:Vector2):
 	var instance = Bullet.instance()
+	instance.shooter = self
 	instance.velocity = velocity.normalized()
 	instance.position = self.position + (velocity.normalized() * 32)
 	get_parent().add_child(instance)
