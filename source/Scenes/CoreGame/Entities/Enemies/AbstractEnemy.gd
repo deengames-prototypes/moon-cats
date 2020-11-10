@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal died
+
 var target:Node2D
 var health:int = 1
 
@@ -14,3 +16,4 @@ func on_shot():
 	self.health -= 1
 	if self.health <= 0:
 		self.queue_free()
+		self.emit_signal("died")

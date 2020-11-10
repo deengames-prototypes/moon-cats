@@ -13,13 +13,16 @@ func _ready():
 	_timer.connect("on_tick", self, "_on_timer_tick")
 	add_child(_timer)
 	$Label.text = str(to_spawn)
-	_timer.start()
+
+func start():
+	_timer.start()	
 	
 func _on_timer_tick():
 	if to_spawn > 0:
 		to_spawn -= 1
 		var chaser = Chaser.instance()
-		self.get_parent().add_child(chaser)
+		# TODO: broadcast event, parent re-broadcasts event
+		self.get_parent().get_parent().add_enemy(chaser)
 		chaser.position = self.position
 		$Label.text = str(to_spawn)
 	else:
