@@ -3,10 +3,11 @@ extends Node2D
 const Chaser = preload("res://Scenes/CoreGame/Entities/Enemies/Chaser.tscn")
 const MoveTimeTimer = preload("res://Scripts/Time/MoveTimeTimer.gd")
 
+export var to_spawn = 10
+
 const _SPAWN_EVERY_SECONDS:float = 1.0
 
 var _timer = MoveTimeTimer.new(_SPAWN_EVERY_SECONDS, 0)
-var to_spawn = 10
 
 func _ready():
 	_timer.connect("on_tick", self, "_on_timer_tick")

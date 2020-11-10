@@ -71,9 +71,53 @@ rotation = -0.785398
 width = 256
 
 [node name="Wave1" type="Node2D" parent="."]
+visible = false
 
 [node name="SpawnPoint" parent="Wave1" instance=ExtResource( 2 )]
-position = Vector2( 637.559, 125.716 )
+position = Vector2( 900.215, 361.433 )
+to_spawn = 3
 
-[node name="SpawnPoint2" parent="Wave1" instance=ExtResource( 2 )]
-position = Vector2( 630.824, 592.66 )
+[node name="Wave2" type="Node2D" parent="."]
+visible = false
+
+[node name="SpawnPoint" parent="Wave2" instance=ExtResource( 2 )]
+position = Vector2( 628.579, 116.736 )
+to_spawn = 5
+
+[node name="SpawnPoint2" parent="Wave2" instance=ExtResource( 2 )]
+position = Vector2( 637.559, 592.661 )
+to_spawn = 5
+
+[node name="Wave3" type="Node2D" parent="."]
+visible = false
+
+[node name="SpawnPoint" parent="Wave3" instance=ExtResource( 2 )]
+position = Vector2( 80.8174, 363.678 )
+to_spawn = 8
+
+[node name="SpawnPoint2" parent="Wave3" instance=ExtResource( 2 )]
+position = Vector2( 1165.12, 354.698 )
+to_spawn = 8
+
+[node name="Wave4" type="Node2D" parent="."]
+visible = false
+
+[node name="SpawnPoint3" parent="Wave4" instance=ExtResource( 2 )]
+position = Vector2( 904.705, 359.188 )
+
+[node name="SpawnPoint4" parent="Wave4" instance=ExtResource( 2 )]
+position = Vector2( 341.229, 347.964 )
+
+[node name="Wave5" type="Node2D" parent="."]
+
+[node name="SpawnPoint" parent="Wave5" instance=ExtResource( 2 )]
+position = Vector2( 80.8174, 363.678 )
+
+[node name="SpawnPoint2" parent="Wave5" instance=ExtResource( 2 )]
+position = Vector2( 1165.12, 354.698 )
+
+[node name="SpawnPoint3" parent="Wave5" instance=ExtResource( 2 )]
+position = Vector2( 637.559, 592.66 )
+
+[node name="SpawnPoint4" parent="Wave5" instance=ExtResource( 2 )]
+position = Vector2( 628.579, 125.716 )
