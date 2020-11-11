@@ -21,7 +21,7 @@ func start():
 func _on_timer_tick():
 	if to_spawn > 0:
 		to_spawn -= 1
-		# TODO: intelligent selection baed on wave number
+		# TODO: intelligent selection based on wave number
 		
 		var enemy:KinematicBody2D
 		if randf() <= 0.7:

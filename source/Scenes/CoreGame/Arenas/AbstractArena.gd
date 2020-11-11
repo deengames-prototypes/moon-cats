@@ -1,19 +1,28 @@
 extends Node2D
 
+signal wave_ready
+signal waves_complete
+
 var _enemies_left = 0
-var _current_wave = 0
+var _current_wave = 1
 
 func _ready():
 	for child in get_children():
 		if "Wave" in child.name:
-			child.visible = false
+			if child.name == "Wave1":
+				child.visible = true
+			else:
+				child.visible = false
 	
-	_check_start_next_wave()
-
 func add_enemy(enemy) -> void:
 	add_child(enemy)
 	_enemies_left += 1
 	enemy.connect("died", self, "_on_enemy_died")
+
+func start_wave():
+	var wave = get_node("Wave" + str(_current_wave))
+	for spawn_point in wave.get_children():
+		spawn_point.start()
 	
 func _on_enemy_died():
 	_enemies_left -= 1
@@ -25,9 +34,7 @@ func _check_start_next_wave() -> void:
 		var wave = get_node("Wave" + str(_current_wave))
 		if wave != null:
 			wave.visible  = true
-			for spawn_point in wave.get_children():
-				spawn_point.start()
-			_current_wave += 1
-			print("Starting wave " + str(_current_wave))
+			print("Now on wave " + str(_current_wave))
+			emit_signal("wave_ready")
 		else:
-			print("YOU WIN YAYAYAYYY!Y!!!!1one")
+			emit_signal("waves_complete")

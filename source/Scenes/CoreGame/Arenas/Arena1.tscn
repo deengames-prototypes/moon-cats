@@ -22,32 +22,42 @@ __meta__ = {
 position = Vector2( 640, 0 )
 width = 1280
 height = 16
+health = 0
+rotation_speed = 0
 
 [node name="Wall2" parent="Border" instance=ExtResource( 1 )]
-position = Vector2( 640, 704 )
+position = Vector2( 640, 712 )
 width = 1280
 height = 16
+health = 0
+rotation_speed = 0
 
 [node name="Wall3" parent="Border" instance=ExtResource( 1 )]
 position = Vector2( 0, 360 )
 width = 16
 height = 720
+health = 0
+rotation_speed = 0
 
 [node name="Wall4" parent="Border" instance=ExtResource( 1 )]
-position = Vector2( 1264, 360 )
+position = Vector2( 1272, 360 )
 width = 16
 height = 720
+health = 0
+rotation_speed = 0
 
 [node name="Permanent" type="Node2D" parent="."]
 
 [node name="P1" parent="Permanent" instance=ExtResource( 1 )]
 position = Vector2( 640, 360 )
 width = 256
+health = 0
 rotation_speed = 5
 
 [node name="P2" parent="Permanent" instance=ExtResource( 1 )]
 position = Vector2( 640, 360 )
 height = 256
+health = 0
 rotation_speed = 5
 
 [node name="Destructible" type="Node2D" parent="Permanent"]
@@ -56,21 +66,29 @@ rotation_speed = 5
 position = Vector2( 256, 192 )
 rotation = -0.785398
 width = 256
+health = 0
+rotation_speed = 0
 
 [node name="D2" parent="Permanent/Destructible" instance=ExtResource( 1 )]
 position = Vector2( 256, 528 )
 rotation = 0.785398
 width = 256
+health = 0
+rotation_speed = 0
 
 [node name="D3" parent="Permanent/Destructible" instance=ExtResource( 1 )]
 position = Vector2( 1024, 192 )
 rotation = 0.785398
 width = 256
+health = 0
+rotation_speed = 0
 
 [node name="D4" parent="Permanent/Destructible" instance=ExtResource( 1 )]
 position = Vector2( 1024, 528 )
 rotation = -0.785398
 width = 256
+health = 0
+rotation_speed = 0
 
 [node name="Wave1" type="Node2D" parent="."]
 visible = false
