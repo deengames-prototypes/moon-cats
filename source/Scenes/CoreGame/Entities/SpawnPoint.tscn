@@ -10,13 +10,14 @@ emission_sphere_radius = 64.0
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.75
-orbit_velocity_random = 1.0
-radial_accel = -100.0
+orbit_velocity_random = 0.5
+linear_accel = -100.0
+radial_accel = -200.0
 scale = 5.0
-scale_random = 1.0
+scale_random = 0.5
 color = Color( 1, 0, 0, 1 )
-hue_variation = 0.1
-hue_variation_random = 1.0
+hue_variation = -0.15
+hue_variation_random = 0.5
 
 [sub_resource type="DynamicFont" id=2]
 size = 64
@@ -26,11 +27,11 @@ font_data = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-amount = 200
-lifetime = 2.0
+amount = 300
 process_material = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
+visible = false
 margin_left = -33.0
 margin_top = -31.0
 margin_right = 62.0
