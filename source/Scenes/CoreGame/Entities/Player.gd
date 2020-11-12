@@ -45,15 +45,11 @@ func _physics_process(delta):
 	var time_since_last_shot = now - _last_shot_time
 	
 	if time_since_last_shot >= _SECONDS_BETWEEN_SHOTS:
-		$ColorRect.color = Color(1, 1, 1)
 		if Input.is_action_pressed("ui_accept"):
 			if velocity == Vector2.ZERO:
 				velocity = _facing_vectors[_facing]
 			self._fire(velocity)
 			self._last_shot_time = now
-
-	else:
-		$ColorRect.color = Color(0.5, 0.5, 0.5)
 
 func on_shot():
 	pass#self.queue_free()
