@@ -13,10 +13,10 @@ func _ready():
 				child.visible = true
 			else:
 				child.visible = false
+	_calculate_enemies_left()
 	
 func add_enemy(enemy) -> void:
 	add_child(enemy)
-	_enemies_left += 1
 	enemy.connect("died", self, "_on_enemy_died")
 
 func start_wave():
@@ -27,6 +27,7 @@ func start_wave():
 func _on_enemy_died():
 	_enemies_left -= 1
 	_check_start_next_wave()
+	print("left=" + str(_enemies_left))
 
 func _check_start_next_wave() -> void:
 	if _enemies_left == 0:
@@ -35,6 +36,14 @@ func _check_start_next_wave() -> void:
 		if wave != null:
 			wave.visible  = true
 			print("Now on wave " + str(_current_wave))
+			_calculate_enemies_left()
 			emit_signal("wave_ready")
 		else:
 			emit_signal("waves_complete")
+
+func _calculate_enemies_left():
+	_enemies_left = 0
+	var wave = get_node("Wave" + str(_current_wave))
+	for spawn_point in wave.get_children():
+		_enemies_left += spawn_point.to_spawn
+	print("E left=" + str(_enemies_left))
