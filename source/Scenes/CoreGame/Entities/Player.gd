@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const Bullet = preload("res://Scenes/CoreGame/Entities/Bullet.tscn")
 
-const _SPEED:int = 100
+const _SPEED:int = 200
 const _SECONDS_BETWEEN_SHOTS:float = 0.3
 
 var _facing:String = "right"

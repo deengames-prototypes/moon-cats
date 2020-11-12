@@ -31,13 +31,14 @@ amount = 300
 process_material = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
-visible = false
-margin_left = -33.0
-margin_top = -31.0
-margin_right = 62.0
-margin_bottom = 45.0
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
 custom_fonts/font = SubResource( 2 )
 text = "10"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

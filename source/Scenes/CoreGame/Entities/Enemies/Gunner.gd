@@ -3,6 +3,7 @@ extends 'res://Scenes/CoreGame/Entities/Enemies/AbstractEnemy.gd'
 const Bullet = preload("res://Scenes/CoreGame/Entities/Bullet.tscn")
 
 const _SPEED = 60
+const _SHOT_SPEED = 45
 const _MAX_DISTANCE = 300 # pixels
 const _MIN_DISTANCE = 200 # pixels
 const _SECONDS_BETWEEN_SHOTS = 1
@@ -32,5 +33,5 @@ func _fire(velocity:Vector2):
 	var instance = Bullet.instance()
 	instance.shooter = self
 	instance.velocity = velocity.normalized()
-	instance.position = self.position + (velocity.normalized() * 60)
+	instance.position = self.position + (velocity.normalized() * _SHOT_SPEED)
 	get_parent().add_child(instance)
